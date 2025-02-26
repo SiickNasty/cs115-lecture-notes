@@ -1,11 +1,11 @@
 import pygame
 
 # init pygame
-pygame.init
+pygame.init()
 
 # window dimensions
 width = 600
-height = 300
+height = 400
 screen = pygame.display.set_mode((width,height))
 
 # set window title
@@ -17,12 +17,12 @@ dt = 0
 speed = 10 
 
 """ Game loop """
-runing = True 
+running = True 
 while running:
   """Handle events"""
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
-      running = False
+         running = False
       
   """ Update our game state"""
 
@@ -30,6 +30,22 @@ while running:
   # Clear screen
   screen.fill("white")
 
+  # draw rectangle
+  pygame.draw.rect(
+    screen, 
+    "green", 
+    pygame.Rect((100,200), (100, 50))
+  )
+  
+  # draw circle
+  pygame.draw.circle(screen, "blue", (100,200), 40)
+  pygame.draw.circle(screen, "black", (200,200), 100)
+
+  # draw line
+  pygame.draw.line(screen, "red", (100,100), (200,200), 5)
+
+  pygame.draw.ellipse(surface=screen, color="red", rect=pygame.Rect((100,100), (100,500)))
+  
   # Update screen
   pygame.display.flip()
 
