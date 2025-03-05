@@ -1,5 +1,7 @@
 import pygame
 from pygame.constants import KEYDOWN
+import helper_functions # importing from other file in same folder
+
 
 # init pygame
 pygame.init()
@@ -8,6 +10,12 @@ pygame.init()
 width = 600
 height = 400
 screen = pygame.display.set_mode((width,height))
+
+# Create font
+system_fonts = pygame.font.get_fonts()
+print(system_fonts)
+my_font = pygame.font.SysFont(system_fonts[0], size=48, bold=True, italic=False)
+score = 0
 
 # set window title
 pygame.display.set_caption("Snake")
@@ -64,17 +72,17 @@ while running:
   # boundaries
   if cur_pos[0] < 0: # x-direction boundaries
     cur_pos[0] = 0 
-    running = False
+    # running = False
   if cur_pos[0] > width-20:  
     cur_pos[0] = width-20
-    running = False
+    # running = False
 
   if cur_pos[1] < 0: # y-direction boundaries
     cur_pos[1] = 0
-    running = False
+    # running = False
   if cur_pos[1] > height-20:
     cur_pos[1] = height-20
-    running = False
+    # running = False
 
   # Snake movement
   snake_body.insert(0, list(cur_pos))
@@ -86,6 +94,11 @@ while running:
   """ Draw our screen """
   # Clear screen
   screen.fill("white")
+
+  # Draw text to screen
+  helper_functions.draw_text(f"Score: {score}", (25,25), "red", my_font, screen)
+  helper_functions.draw_text(f"Snake!", (300,20), "blue", my_font, screen)
+  
 
   # Draw snake
   for body in snake_body: 
